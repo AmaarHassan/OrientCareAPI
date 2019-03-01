@@ -1,0 +1,18 @@
+const express = require('express');
+const co = require('co');
+const router = express.Router();
+
+/* GET users listing. */
+router.get('/', function(req, res) {
+  res.send('<h1> Users Route </h1>You have tried to come to Users Route as empty / character.');
+});
+
+router.get('/check', (req,res,next)=>{
+  co(function*(){
+      const Agents = global.db.collection('Agent');
+      const count = yield Agents.count();
+      res.send('<h2>'+count+'<h2>');
+  }).catch(err=> next(err));
+})
+
+module.exports = router;

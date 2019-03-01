@@ -1,0 +1,18 @@
+#!/usr/bin/nodejs
+var debug = require('debug')('my-application');
+var app = require('../app');
+const MongoClient = require('mongodb').MongoClient;
+
+const mongo_uri = 'mongodb://3.121.181.58:27017/';
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+MongoClient.connect(mongo_uri, { useNewUrlParser: true })
+  .then(client => {
+    global.db = client.db('OrientCare');
+    if(global.db) console.log('Connected to mongo online orient care');
+  }).catch(error =>{console.log(error)});
