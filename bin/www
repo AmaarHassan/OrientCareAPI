@@ -3,7 +3,7 @@ var debug = require('debug')('my-application');
 var app = require('../app');
 const MongoClient = require('mongodb').MongoClient;
 
-const mongo_uri = 'mongodb://3.121.181.58:27017/';
+const mongo_uri = 'mongodb://35.159.19.24:38128/';
 
 app.set('port', process.env.PORT || 3000);
 
@@ -13,6 +13,6 @@ var server = app.listen(app.get('port'), function() {
 
 MongoClient.connect(mongo_uri, { useNewUrlParser: true })
   .then(client => {
-    global.db = client.db('OrientCare');
+    global.db = client.db('Orient-Care');
     if(global.db) console.log('Connected to mongo online orient care');
   }).catch(error =>{console.log(error)});
